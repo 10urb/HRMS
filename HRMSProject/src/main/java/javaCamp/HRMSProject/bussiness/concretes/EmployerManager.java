@@ -47,9 +47,6 @@ public class EmployerManager implements EmployerService{
 		else if(!checkIfEMailExists(employer)) {
 			return new ErrorResult("Mail adresi zaten var");
 		}
-		else if(!checkIfPasswordAgainControl(employer)) {
-			return new ErrorResult("Parololar aynı değil");
-		}
 		else if(!eMailVerificationService.mailVerificationSending(employer.getEMail())) {
 			return new ErrorResult("Mail doğrulanamadı");
 		}
@@ -127,18 +124,5 @@ public class EmployerManager implements EmployerService{
 			}  
 			  return true;
 	}
-	  
-	  boolean checkIfPasswordAgainControl(Employer employer) {
-		  
-		  if(!employer.getPassword().contains(employer.getPasswordAgain())) {
-			 
-			  return false;
-		  }
-		  
-		  return true;
-	  }
-	  
 
-	 
-	 
 }

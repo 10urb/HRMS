@@ -33,7 +33,7 @@ public class KnownTechnology {
 	@Column(name = "technology")
 	private String technologyName;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "resume_id")
 	private Resume resume;
 

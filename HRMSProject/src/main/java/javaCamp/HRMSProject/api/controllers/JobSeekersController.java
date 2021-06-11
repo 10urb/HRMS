@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javaCamp.HRMSProject.bussiness.abstracts.JobSeekerService;
 import javaCamp.HRMSProject.core.utilities.results.DataResult;
 import javaCamp.HRMSProject.core.utilities.results.Result;
+import javaCamp.HRMSProject.core.utilities.results.SuccessDataResult;
 import javaCamp.HRMSProject.core.utilities.results.SuccessResult;
 import javaCamp.HRMSProject.entities.concretes.JobSeeker;
 
@@ -45,6 +47,12 @@ public class JobSeekersController {
 		
 		 jobSeekerService.delete(jobSeeker);
 		 return  new SuccessResult("Kayıt silindi");
+	}
+	
+	@GetMapping("/getByUserId")
+	 public DataResult<JobSeeker> getByUserId(@RequestParam int userId) {
+		
+		return this.jobSeekerService.getByUserId(userId);
 	}
 
 }

@@ -12,5 +12,7 @@ public class EMailVerificationManager implements EMailVerificationService{
 		}
 		return true;
 	}
+	
+	
 
 }

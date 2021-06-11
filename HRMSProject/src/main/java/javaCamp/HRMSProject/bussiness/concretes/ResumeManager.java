@@ -36,6 +36,11 @@ public class ResumeManager implements ResumeService{
 		return new SuccessResult("Added");
 	}
 
+	@Override
+	public DataResult<Resume> getByResumeId(int resumeId) {
+		return new SuccessDataResult<Resume>( this.resumeDao.getByResumeId(resumeId));
+	}
+
 	
 
 

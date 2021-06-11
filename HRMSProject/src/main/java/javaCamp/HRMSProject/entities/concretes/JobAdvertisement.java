@@ -37,8 +37,11 @@ public class JobAdvertisement {
 	@Column(name="job_description")
 	private String jobDescrption;
 	
-	@Column(name="salary")
-	private int salary;
+	@Column(name="salary_min")
+	private double salaryMin;
+	
+	@Column(name="salary_max")
+	private double salaryMax;
 	
 	@Column(name="number_of_open_position")
 	private int numberOfOpenPosition;

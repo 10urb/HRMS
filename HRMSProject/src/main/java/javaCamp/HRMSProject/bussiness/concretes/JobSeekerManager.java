@@ -41,7 +41,6 @@ public class JobSeekerManager   implements JobSeekerService{
 	@Override
 	public Result add(JobSeeker jobSeeker) {
 		
-		
 		if(!this.nullAndEmptyBlocker(jobSeeker)){
 			return new ErrorResult("Alanlar boş olamaz");
 		}
@@ -52,12 +51,6 @@ public class JobSeekerManager   implements JobSeekerService{
 		else if (!checkIfNationalityIdExists(jobSeeker)) {
 			return new ErrorResult("Tc numarası zaten var");
 		}
-		else if(!checkIfPasswordAgainControl(jobSeeker)) {
-			
-			return new ErrorResult("Parolalar aynı değil");
-		}
-		
-		
 		else if(identityCheckerService.checkIfRealPerson(jobSeeker)) {
 			
 			return new ErrorResult("Kimlik doğrulanamadı");
@@ -67,13 +60,9 @@ public class JobSeekerManager   implements JobSeekerService{
 		}
 		
 		else {
-	
 			jobSeekerDao.save(jobSeeker);		
 			return new SuccessResult("Ürün eklendi");
-			
-		
 		}
-
 	}
 
 	@Override
@@ -95,6 +84,15 @@ public class JobSeekerManager   implements JobSeekerService{
 		
 		return new SuccessDataResult<List<JobSeeker>> (this.jobSeekerDao.findAll());
 	}
+	
+	@Override
+	public DataResult<JobSeeker> getByUserId(int userId) {
+		
+		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.getByUserId(userId));
+	}
+	
+	
+	
 	
 // buradan aşağısı iş kuralı metodları
 
@@ -138,19 +136,6 @@ public class JobSeekerManager   implements JobSeekerService{
 		 
 		 return true;
 	  }
-	  
-	  boolean checkIfPasswordAgainControl(JobSeeker jobSeeker) {
-		  
-		  if(!jobSeeker.getPassword().contains(jobSeeker.getPasswordAgain())) {
-			 
-			  return false;
-		  }
-		  
-		  return true;
-	  }
-	  
-	  
-	  
 
 	
 }

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,11 +50,12 @@ public class EducationInformation  {
 	@Column(name="graduation_date")
 	private Date graduationDate;
 	
+	@NotNull
 	@Column(name="education_status")
 	private boolean educationStatus;
 	
 
-	@JsonIgnore
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "resume_id")
 	private Resume resume;

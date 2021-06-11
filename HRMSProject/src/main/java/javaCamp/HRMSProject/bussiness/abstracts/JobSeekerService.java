@@ -15,7 +15,7 @@ public interface JobSeekerService {
 	Result delete(JobSeeker jobSeeker);
 	
 	DataResult<List<JobSeeker>> getAll();
-	
+	DataResult<JobSeeker> getByUserId(int userId);
 	
 
 }

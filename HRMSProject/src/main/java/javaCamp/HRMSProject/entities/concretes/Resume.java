@@ -47,29 +47,29 @@ public class Resume  {
 	private String coverLetter;
 	
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "resume",cascade = CascadeType.ALL)
 	private List< JobInformation> jobInformations;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "resume",cascade = CascadeType.ALL)
 	private List<Image> images;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "resume",cascade = CascadeType.ALL)
 	private List<EducationInformation> educationInformations;
 	
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "resume",cascade = CascadeType.ALL)
+	
+	@OneToMany(mappedBy = "resume")
 	private List<KnownLanguage> knownLanguages;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "resume",cascade = CascadeType.ALL)
 	private List<KnownTechnology> knownTechnologies;
 		
-	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne()
 	@JoinColumn(name = "user_id")
 	private JobSeeker jobSeeker;
 

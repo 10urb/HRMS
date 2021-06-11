@@ -54,7 +54,7 @@ public class JobInformation {
 	
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "reseume_id")
+	@JoinColumn(name = "resume_id")
 	private Resume resume;
 
 }

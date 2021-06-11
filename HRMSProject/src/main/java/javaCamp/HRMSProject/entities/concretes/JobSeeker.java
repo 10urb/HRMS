@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","resumes"})
 @Entity
 @PrimaryKeyJoinColumn(name="user_id")
 @AllArgsConstructor
@@ -45,7 +44,7 @@ public class JobSeeker extends User {
 	private int birthYear;
 
 
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "jobSeeker",cascade = CascadeType.ALL)
 	private List<Resume> resumes;
 }
