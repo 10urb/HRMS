@@ -3,6 +3,7 @@ package javaCamp.HRMSProject.api.controllers;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import javaCamp.HRMSProject.entities.concretes.JobAdvertisement;
 
 @RestController
 @RequestMapping("/api/JobAdvertisements")
+@CrossOrigin
 public class JobAdvertisementsController {
  JobAdvertisementService jobAdvertisementService;
 
@@ -26,12 +28,9 @@ public class JobAdvertisementsController {
  	}
 
 			@GetMapping("/getByStatusTrue")
-			public DataResult<List<JobAdvertisement>> getByStatus(
-	   ){
-				
-return this.jobAdvertisementService.getByStatus(true);
-
-
+			public DataResult<List<JobAdvertisement>> getByStatus()
+			{
+				return this.jobAdvertisementService.getByStatus(true);
 			}
 
 				@PostMapping("/add")
@@ -41,10 +40,9 @@ return this.jobAdvertisementService.getByStatus(true);
 				}
 				
 				@GetMapping("/findByStatusAndPublicationDate")
-				  public DataResult<List<JobAdvertisement>> findByStatusOrderByPublicationDateAsc(
-						  @RequestParam boolean status, Date date){
+				  public DataResult<List<JobAdvertisement>> findByStatusOrderByPublicationDateAsc(@RequestParam  Date date){
 					  
-					  return this.jobAdvertisementService.findByStatusAndPublicationDate(status,date);
+					  return this.jobAdvertisementService.findByStatusAndPublicationDate(true,date);
 				  }
 				  
 				  
