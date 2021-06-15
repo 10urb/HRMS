@@ -24,7 +24,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","resume"})
 @Entity
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javaCamp.HRMSProject.bussiness.abstracts.ImageService;
+import javaCamp.HRMSProject.core.utilities.messages.Messages;
 import javaCamp.HRMSProject.core.utilities.results.DataResult;
 import javaCamp.HRMSProject.core.utilities.results.Result;
 import javaCamp.HRMSProject.core.utilities.results.SuccessDataResult;
@@ -27,12 +28,12 @@ public class ImageManager implements ImageService {
 	@Override
 	public Result add(Image image) {
 		this.imageDao.save(image);
-		return new SuccessResult("added");
+		return new SuccessResult(Messages.Added);
 	}
 
 	@Override
 	public DataResult<List<Image>> getAll() {
-		return new SuccessDataResult<List<Image>>(this.imageDao.findAll());
+		return new SuccessDataResult<List<Image>>(this.imageDao.findAll(),Messages.Listed);
 	}
 
 }

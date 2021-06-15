@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javaCamp.HRMSProject.bussiness.abstracts.JobAdvertisementService;
 import javaCamp.HRMSProject.core.utilities.results.DataResult;
+import javaCamp.HRMSProject.core.utilities.results.ErrorResult;
 import javaCamp.HRMSProject.core.utilities.results.Result;
 import javaCamp.HRMSProject.core.utilities.results.SuccessDataResult;
 import javaCamp.HRMSProject.core.utilities.results.SuccessResult;
@@ -39,10 +40,10 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> findByStatusAndPublicationDate(boolean status, Date date) {
+	public DataResult<List<JobAdvertisement>>  findByStatusOrderByPublicationDateDesc(boolean status) {
 		status = true;
 		return new SuccessDataResult<List<JobAdvertisement>>(
-				this.jobAdvertisementDao.findByStatusAndPublicationDate(status,date));
+				this.jobAdvertisementDao. findByStatusOrderByPublicationDateDesc(status));
 	}
 
 	@Override
@@ -57,4 +58,14 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult();
 	}
-}
+
+	@Override
+	public Result updateStatus( int id,boolean status) {
+		JobAdvertisement  entity = this.jobAdvertisementDao.getOne(id);
+		entity.setStatus(status);
+			this.jobAdvertisementDao.save(entity);
+			return new SuccessResult("Status changed");
+		}
+		
+	}
+

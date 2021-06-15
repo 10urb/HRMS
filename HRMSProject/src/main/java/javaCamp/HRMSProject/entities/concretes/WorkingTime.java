@@ -1,46 +1,37 @@
 package javaCamp.HRMSProject.entities.concretes;
 
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-@Data
 @Entity
+@Data
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
+@Table(name="working_times")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="known_languages")
-public class KnownLanguage {
+
+public class WorkingTime {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="known_language_id")
-	private int knownLanguageId;
+	@Column(name="working_time_id")
+	private int workingTimeId;
 	
-	@Column(name = "language")
-	private String language;
+	@Column(name="working_time")
+	private String workingTime;
 	
-	@Column(name="language_level")
-	@Min(1)
-	@Max(5)
-	private int languageLevel;
-
-	
-	@ManyToOne()
-	@JoinColumn(name = "resume_id")
-	private Resume resume;
-	
+	@OneToMany(mappedBy = "workingTime")
+	private List<JobAdvertisement> jobAdvertisements;
 }

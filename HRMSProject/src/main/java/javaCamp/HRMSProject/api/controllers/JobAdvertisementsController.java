@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import javaCamp.HRMSProject.entities.concretes.JobAdvertisement;
 
 @RestController
 @RequestMapping("/api/JobAdvertisements")
-@CrossOrigin
+
 public class JobAdvertisementsController {
  JobAdvertisementService jobAdvertisementService;
 
@@ -27,27 +28,30 @@ public class JobAdvertisementsController {
 	this.jobAdvertisementService = jobAdvertisementService;
  	}
 
+ 	@CrossOrigin
 			@GetMapping("/getByStatusTrue")
 			public DataResult<List<JobAdvertisement>> getByStatus()
 			{
 				return this.jobAdvertisementService.getByStatus(true);
 			}
 
+			@CrossOrigin
 				@PostMapping("/add")
 				public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
 					return this.jobAdvertisementService.add(jobAdvertisement);
 							
 				}
 				
-				@GetMapping("/findByStatusAndPublicationDate")
-				  public DataResult<List<JobAdvertisement>> findByStatusOrderByPublicationDateAsc(@RequestParam  Date date){
+				@CrossOrigin
+				@GetMapping("/findByStatusTrueOrderByPublicationDateDesc")
+				  public DataResult<List<JobAdvertisement>> findByStatusOrderByPublicationDateAsc(){
 					  
-					  return this.jobAdvertisementService.findByStatusAndPublicationDate(true,date);
+					  return this.jobAdvertisementService. findByStatusOrderByPublicationDateDesc(true);
 				  }
 				  
 				  
 				  
-				  
+				@CrossOrigin
 				@GetMapping("/ findByEmployer_CompanyNameAndStatus")
 				 public    DataResult<List<JobAdvertisement>> findByEmployer_CompanyNameAndStatus(@RequestParam
 				    		String companyName,boolean status ){
@@ -55,9 +59,16 @@ public class JobAdvertisementsController {
 					 return this.jobAdvertisementService.findByEmployer_CompanyNameAndStatus(companyName, status);
 					 
 				    }
+				@CrossOrigin
 				@PostMapping("/update")
 				public Result update(@RequestBody JobAdvertisement jobAdvertisement) {
 				
 					return this.jobAdvertisementService.update(jobAdvertisement);
+				}
+				
+				@CrossOrigin
+				@PostMapping("/updatestatusPassive")
+				public Result updateStatus(@RequestParam int id) {
+					return this.jobAdvertisementService.updateStatus(id, false);
 				}
 }

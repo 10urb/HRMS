@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,13 +23,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","jobSeeker"})
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name="resumes")
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Resume  {
 	
 	@Id
@@ -58,7 +57,6 @@ public class Resume  {
 	
 	@OneToMany(mappedBy = "resume",cascade = CascadeType.ALL)
 	private List<EducationInformation> educationInformations;
-	
 	
 	
 	@OneToMany(mappedBy = "resume")

@@ -21,6 +21,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @PrimaryKeyJoinColumn(name="user_id")
+
+
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)

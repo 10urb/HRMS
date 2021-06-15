@@ -23,7 +23,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","resume"})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -52,7 +51,7 @@ public class JobInformation {
 	@Column(name="job_position")
 	private String jobPosition;
 	
-	@JsonIgnore
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "resume_id")
 	private Resume resume;

@@ -16,12 +16,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
+
 @Data
 @Entity
 @Table(name="job_titles")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
 
 public class JobTitle {
 	

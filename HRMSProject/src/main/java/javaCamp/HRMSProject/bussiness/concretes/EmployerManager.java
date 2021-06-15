@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javaCamp.HRMSProject.bussiness.abstracts.EmployerService;
+import javaCamp.HRMSProject.core.utilities.messages.Messages;
 import javaCamp.HRMSProject.core.utilities.results.DataResult;
 import javaCamp.HRMSProject.core.utilities.results.ErrorResult;
 import javaCamp.HRMSProject.core.utilities.results.Result;
 import javaCamp.HRMSProject.core.utilities.results.SuccessDataResult;
 import javaCamp.HRMSProject.core.utilities.results.SuccessResult;
-import javaCamp.HRMSProject.core.validations.identityValidation.ConfirmToEmployerService;
 import javaCamp.HRMSProject.core.validations.identityValidation.EMailVerificationService;
 import javaCamp.HRMSProject.dataAccess.abstracts.EmployerDao;
 import javaCamp.HRMSProject.entities.concretes.Employer;
@@ -21,16 +21,14 @@ public class EmployerManager implements EmployerService{
 	
 	EmployerDao employerDao;
 	EMailVerificationService eMailVerificationService;
-	ConfirmToEmployerService confirmToEmployerService;
+
 	
 	@Autowired
 	EmployerManager (EmployerDao employerDao,
-			EMailVerificationService eMailVerificationService,
-			ConfirmToEmployerService confirmToEmployerService){
+			EMailVerificationService eMailVerificationService){
 		
 		this.employerDao=employerDao;
 		this.eMailVerificationService=eMailVerificationService;
-		this.confirmToEmployerService=confirmToEmployerService;
 	}
 	
 	
@@ -50,7 +48,7 @@ public class EmployerManager implements EmployerService{
 		else if(!eMailVerificationService.mailVerificationSending(employer.getEMail())) {
 			return new ErrorResult("Mail doğrulanamadı");
 		}
-		else if(!confirmToEmployerService.confirmToEmployer(employer)) {
+		else if(!confirmToEmployer(employer)) {
 			return new ErrorResult("Onay reddedildi");
 		}
 		else {
@@ -78,7 +76,7 @@ public class EmployerManager implements EmployerService{
 	@Override
 	public DataResult<List<Employer>> getAll() {
 		
-		return new SuccessDataResult<List<Employer>>(employerDao.findAll());
+		return new SuccessDataResult<List<Employer>>(employerDao.findAll(),Messages.Listed);
 	}
 
 	@Override
@@ -123,6 +121,10 @@ public class EmployerManager implements EmployerService{
 				return false;	
 			}  
 			  return true;
+	}
+	  
+	   boolean confirmToEmployer(Employer employer) {
+			return true;//onay butonu
 	}
 
 }
